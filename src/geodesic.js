@@ -116,6 +116,9 @@
   function geodesicDensify(pts, maxSegmentLength) {
     var radius = 6371008.771515059,
       result = [];
+    if (!maxSegmentLength) {
+      maxSegmentLength = 10000;
+    }
     if (maxSegmentLength < radius / 10000) {
       maxSegmentLength = radius / 10000;
     }
@@ -185,11 +188,11 @@
 
   //geodesic distance
   geoUtil.computeDistance = function(pt1, pt2, unit) {
-    //pt1 and pt2 are object literal with lat lng properties
-    var distance, lng1 = pt1.lng * toRad,
-      lng2 = pt2.lng * toRad,
-      lat1 = pt1.lat * toRad,
-      lat2 = pt2.lat * toRad;
+    //pt1 and pt2 are array with lng and lat value
+    var distance, lng1 = pt1[0] * toRad,
+      lng2 = pt2[0] * toRad,
+      lat1 = pt1[1] * toRad,
+      lat2 = pt2[1] * toRad;
 
     if (!(lat1 === lat2 && lng1 === lng2)) {
       inverseGeodeticResult = _inverseGeodeticSolver(lat1, lng1, lat2, lng2);

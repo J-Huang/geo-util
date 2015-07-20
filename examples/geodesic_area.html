@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>geodesic util</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css" />
+</head>
+
+<body>
+  <div id="map" style="width: 600px; height: 400px"></div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js"></script>
+  <script src="../src/geodesic.js"></script>
+  <script>
+    var map = L.map('map').setView([37.503273, -97.688485], 14);
+
+    L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}').addTo(map);
+    
+    var kansasFarm = [
+      [-97.697905, 37.510844],
+      [-97.697669, 37.496191],
+      [-97.679887, 37.496123],
+      [-97.679559, 37.510763],
+      [-97.697905, 37.510844]
+    ],
+    latlngFarm = kansasFarm.map(function(pt){
+      return [pt[1], pt[0]];
+    });
+    var area = geoUtil.computeArea(kansasFarm, 'squareMiles');
+
+    var polygon = L.polygon(latlngFarm).addTo(map).bindPopup("Do you know in Kansas, farms are quarter square miles each. The area of the highlight is " + area.toFixed(2) + " square miles.").openPopup();
+
+  </script>
+</body>
+
+</html>
