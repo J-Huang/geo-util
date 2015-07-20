@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Leaflet Quick Start Guide Example</title>
+  <meta charset="utf-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css" />
+</head>
+
+<body>
+  <div id="map" style="width: 600px; height: 400px"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js"></script>
+  <script src="../src/projection.js"></script>
+  <script>
+    var map = L.map('map').setView([37.7, -122.3], 10);
+
+    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    var popup = L.popup();
+
+    function onMapClick(e) {
+      var lng = e.latlng.lng,
+        lat = e.latlng.lat,
+        utm = geoUtil.lnglat2Utm(lng, lat);
+      popup
+        .setLatLng(e.latlng)
+        .setContent('lng: ' + e.latlng.lng + ' lat: ' + e.latlng.lat + '<br/>utm x: ' + utm.x + ' utm y: ' + utm.y + ' utm zone: ' + (utm.south ? 'South' : 'North') + utm.zone)
+        .openOn(map);
+    }
+
+    map.on('click', onMapClick);
+  </script>
+</body>
+
+</html>
