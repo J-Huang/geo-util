@@ -15,7 +15,7 @@ UTM is probably the most used projection in GIS. In order to plot it on web maps
 - geoUtil.lnglat2WebMercator(lng, lat). It returns an array with x and y values in web mercator.
 
 ## [geodesic](https://github.com/J-Huang/geo-util/blob/master/src/geodesic.js)
-- geodesic util tools can densify between two lng/lat value pairs. It provides methods to measure distance and area.
+- geodesic util tools can densify between two lng/lat value pairs. It provides methods to measure distance and area with high accuracy.
 
 ### samples
 [<img src="https://github.com/J-Huang/geo-util/blob/master/examples/geodesic_densify.png" style="width:300px;" alt="geodesic distance" />](https://rawgit.com/J-Huang/geo-util/master/examples/geodesic_distance_densify.html)
